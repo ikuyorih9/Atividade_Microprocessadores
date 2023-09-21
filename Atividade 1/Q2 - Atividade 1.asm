@@ -1,0 +1,14 @@
+org 00h
+
+inicio:
+MOV ACC,#02
+MOV B,#03
+MOV 022h,#07
+ADD A,022h
+DEC A,#03
+INC B
+SUBB B,A
+MUL AB
+INC B,#02
+DIV B,A
+STO
