@@ -69,12 +69,12 @@ inicio:
 	INC B
 	DIV AB ;Divide A por B
 	
-	;Armazenana os valor de A e B em dois endereçõs de memória
+	;Armazenana os valor de A e B em dois endereços de memória
 	MOV 04h, A
 	MOV 03h, B
 	
-	JMP inicio
-end
+	JMP inicio ;Vai para o início
+end ;Fim do programa
 ```
 ### 1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).
 
