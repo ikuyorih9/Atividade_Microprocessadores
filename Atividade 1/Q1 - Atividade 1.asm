@@ -31,11 +31,12 @@ end
 ;b) Quantos ciclos de m√°quina esse programa contem?
 ;	R = Como o cristal oscilador do 8051 √© de 12MHz e 1 ciclo de m√°quina leva 12 per√≠odos de clock, ent√£o 1 ciclo de m√°quina leva 1us. Como o c√≥digo tem 23us de tempo total, conclui-se que o programa gasta 23 ciclos de m√°quina.
 
-;c)
+;c)O que aconteceu ao mover uma porta inteira de 8 registradores(como: ìMOV A, P1î, no exemplo) para um destino e porque seu valor È FF ? (consulte a p·gina 7 do datasheet AT89S51 Atmel que versa sobre a inicializaÁ„o de registradores - lembrando que o MCS-51 possui 4 portas: P1, P2, P3, P4).
+ 
 ;	R=
 
 ;d) Qual valor apareceu no acumulador ap√≥s ter movido R1 de forma indireta para ele?
 ;	R = O valor que apareceu no acumulador √© o valor salvo na mem√≥ria na posi√ß√£o apontada por R1. No caso FF.
 
-;e) 
+;e Por que foi possÌvel mover um valor de 4 dÌgitos para DPTR? Em quais registradores especiais do simulador foi possÌvel verificar mudanÁas quando a operaÁ„o foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal? 
 ;	R = O DPTR √© uma jun√ß√£o de dois registradores, o DPH e o DPL, cada um com 2 digitos. O valor 9A foi para o DPH e o 5B para o DPL. Assim, o maior valor poss√≠vel para o DPTR √© FFFFh. 
