@@ -41,7 +41,7 @@ Como o cristal oscilador do 8051 é de 12MHz e 1 ciclo de máquina leva 12 perí
 ### d) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?
 O valor que apareceu no acumulador é o valor salvo na memória na posição apontada por R1. No caso FF.
 
-### e) Por que foi poss�vel mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi poss�vel verificar mudanças quando a operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal? 
+### e) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi possível verificar mudanças quando a operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal? 
 O DPTR é uma junção de dois registradores, o DPH e o DPL, cada um com 2 digitos. O valor 9A foi para o DPH e o 5B para o DPL. Assim, o maior valor possível para o DPTR é FFFFh. 
 
 ## 2) Manipulação de dados em registradores e endereços de memória por meio de instruções aritméticas: 
@@ -76,6 +76,8 @@ inicio:
 	JMP inicio
 end
 ```
+### 1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque
+ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).
 
 ## 3) Manipulação de dados em registradores e endereços de memória por meio de instruções lógicas e booleanas:
 
