@@ -32,8 +32,7 @@ end
 ;	R = Como o cristal oscilador do 8051 é de 12MHz e 1 ciclo de máquina leva 12 períodos de clock, então 1 ciclo de máquina leva 1us. Como o código tem 23us de tempo total, conclui-se que o programa gasta 23 ciclos de máquina.
 
 ;c)O que aconteceu ao mover uma porta inteira de 8 registradores(como: �MOV A, P1�, no exemplo) para um destino e porque seu valor � FF ? (consulte a p�gina 7 do datasheet AT89S51 Atmel que versa sobre a inicializa��o de registradores - lembrando que o MCS-51 possui 4 portas: P1, P2, P3, P4).
- 
-;	R=
+;	R = 
 
 ;d) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?
 ;	R = O valor que apareceu no acumulador é o valor salvo na memória na posição apontada por R1. No caso FF.
