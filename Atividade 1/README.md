@@ -83,6 +83,7 @@ inicio:
 end ;Fim do programa
 ```
 **1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).**
+
 Isso ocorre pelo fato de que se o número de bits 1 do meu valor for ímpar, o PSW indica o bit menos significativo como 1, e se o número de bits 1 for par o PSW indica como 0. No exemplo dado, o valor 4 (0100) indica 1 como o esperado e, o valor 3 (0011), indica 0.
 
 ## 3) Manipulação de dados em registradores e endereços de memória por meio de instruções lógicas e booleanas:
