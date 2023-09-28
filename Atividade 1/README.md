@@ -85,11 +85,11 @@ inicio:
 	RL A 
 	RL A
 
-	ORL A,B :OR entre A e B
-	XRL A,B :XOR entre A e B
-	SWAP A :Swap de A
+	ORL A,B ;OR entre A e B
+	XRL A,B ;XOR entre A e B
+	SWAP A ;Swap de A
 
-	JMP inicio :volta para o inicio
+	JMP inicio ;volta para o inicio
 	
 	end ;encerra o programa
 ```
