@@ -6,13 +6,13 @@ inicio:
 
 	ANL A,B ;Realiza AND entre A e B
 
-  ;Rotate right (rotacao a direita) duas vezes
+  	;Rotate right (rotacao a direita) duas vezes:
 	RR A 
 	RR A
 
 	CPL A ;Complemento de A
 
-  ;Rotate Left (rotacao a esquerda) duas vezes:
+  	;Rotate Left (rotacao a esquerda) duas vezes:
 	RL A 
 	RL A
 
