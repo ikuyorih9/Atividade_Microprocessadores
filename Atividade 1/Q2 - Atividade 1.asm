@@ -1,15 +1,28 @@
 org 00h
 
 inicio:
-MOV ACC,#02 ;Transfere o valor 2 em decimal para o registrador ACC
-MOV B,#03 ;Transfere o valor 3 em decimal para o registrador B
-MOV 022h,#07 ;Transfere o valor 7 em decimal para o endereÁo 22 da memÛria
-ADD A,022h ;Soma o conte˙do do endereÁo de memÛria 22 com o ACC
-DEC A,#03 ;Decrementa 3 unidades do registrador ACC
-INC B ;Incrementa 1 unidade no registrador B
-SUBB B,A ;Subtrai o conte˙do de A por B
-MUL AB ;Multiplica A por B
-INC B,#02 ;Incrementa 2 unidades no registrador B
-DIV B,A ;Divide A por B
-;N√O SEI MAIS :(((
-STO
+org 00h
+
+inicio:
+	MOV ACC,#02 ;Transfere o valor 2 em decimal para o registrador ACC
+	MOV B,#03 ;Transfere o valor 3 em decimal para o registrador B
+	MOV 022h,#07 ;Transfere o valor 7 em decimal para o endere√ßo 22 da mem√≥ria
+	ADD A,022h ;Soma o conte√∫do do endere√ßo de mem√≥ria 22 com o ACC
+	;Decrementa 3 unidades em A
+	DEC A
+	DEC A
+	DEC A
+	INC B ;Incrementa 1 unidade no registrador B
+	SUBB A,B ;Subtrai o conte√∫do de A por B
+	MUL AB ;Multiplica A por B
+	;Incrementa 2 unidades em B
+	INC B
+	INC B
+	DIV AB ;Divide A por B
+	
+	;Armazenana os valor de A e B em dois endere√ßos de mem√≥ria
+	MOV 04h, A
+	MOV 03h, B
+	
+	JMP inicio ;Vai para o in√≠cio
+end ;Fim do programa
