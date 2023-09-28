@@ -1,9 +1,6 @@
 org 00h
 
 inicio:
-org 00h
-
-inicio:
 	MOV ACC,#02 ;Transfere o valor 2 em decimal para o registrador ACC
 	MOV B,#03 ;Transfere o valor 3 em decimal para o registrador B
 	MOV 022h,#07 ;Transfere o valor 7 em decimal para o endereço 22 da memória
