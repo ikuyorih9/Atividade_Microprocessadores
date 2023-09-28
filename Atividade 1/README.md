@@ -76,7 +76,7 @@ inicio:
 	JMP inicio ;Vai para o início
 end ;Fim do programa
 ```
-**1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).
+** 1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).
 
 ## 3) Manipulação de dados em registradores e endereços de memória por meio de instruções lógicas e booleanas:
 
