@@ -1,3 +1,12 @@
+# Atividade prática de uso de set de instruções e manipulação de dados em registradores e endereços de memória em microcontroladores.
+
+Alunos:
+* Arthur Breno dos Reis Paula - 12547382;
+* Guilherme Chiarotto de Moraes - 12745229;
+* Hugo Hiroyuki Nakamura - 12732037.
+
+---
+
 ## 1) Manipulação de dados em registradores e endereços de memória por meio de instruções de transferência de dados:
 
 ```
