@@ -48,10 +48,6 @@ O valor que apareceu em ACC foi o valor da memória, no endereço apontado por R
 
 **e) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi poss�vel verificar mudanças quando a operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal?**
 
-<<<<<<< HEAD
-### e) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi possível verificar mudanças quando a operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal? 
-=======
->>>>>>> 1Change
 O DPTR é uma junção de dois registradores, o DPH e o DPL, cada um com 2 digitos. O valor 9A foi para o DPH e o 5B para o DPL. Assim, o maior valor possível para o DPTR é FFFFh. 
 
 ## 2) Manipulação de dados em registradores e endereços de memória por meio de instruções aritméticas: 
