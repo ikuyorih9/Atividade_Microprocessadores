@@ -1,154 +1,119 @@
-# Atividade prática de uso de set de instruções e manipulação de dados em registradores e endereços de memória em microcontroladores.
+# Projeto de um cronômetro digital usando Assembly e 8051.
 
 Alunos:
-* Arthur Breno dos Reis Paula - 12547382;
 * Guilherme Chiarotto de Moraes - 12745229;
 * Hugo Hiroyuki Nakamura - 12732037.
-
 ---
 
-## 1) Manipulação de dados em registradores e endereços de memória por meio de instruções de transferência de dados:
+## 1. Principais blocos do projeto.
+
+### 1.1. Rotinas de espera.
+
+O projeto é dividido em dois funcionamentos: a contagem de tempo a cada 250ms e a contagem de tempo a cada 1s. Para isso, uma rotina de espera de 10ms foi criada, servindo de base para rotinas de tempos maiores.
 
 ```
-org 0000h
+;Rotina de delay de 10ms.
 
-inicio:
-	MOV ACC, #2h ;Transfere 2 em hexadecimal para o registrador ACC.
-	MOV ACC, #0	
+Espera10ms:
+	PUSH 00h ;Salva o valor de R0 na pilha.
+	PUSH 01h ;Salva o valor de R1 na pilha.
 
-	;Muda o banco para 00b (0).
-	CLR RS0 
-	CLR RS1
+	MOV R0, #25 ;Carrega o registrador R0 com o número 25.
 
-	MOV R0, #10h ;Move de forma direta 10 em hexadecimal para o resgistrador R0.
-	MOV B, #9h ;Move de forma direta o 9 em hexadecimal para o registrador B	
-	MOV 0Fh, P1 ;Move o valor da porta P1 para a posição 0F da memória.
-	
-	;Muda o banco para 01b (1).
-	SETB RS0
-	CLR RS1
-	
-	MOV R0, 0Fh ;Move o valor na posição 0F para o registrador 0.
-	MOV 7Fh, R0 ; Move o do registrador R0 para o endereço 7F.
-	MOV R1, #7Fh ;Aponta o registrador R1 para a posição 7F
-	MOV ACC, @R1 ;Obtém o valor da posição dado pelo valor de R1 para o acumulador.
-	MOV DPTR, #9A5Bh ;Move 9A5B para o DPH p
-	NOP
+	InicioCiclo200: ;Subrotina de contagem de 200 ciclos de máquina.
+		MOV R1, #200 ;Carrega o registrador R1 com o número 200.
+		DJNZ R1, $ ;Decrementa o valor de R1 e mantém nessa linha até o valor de R1 ser 0.
+	DJNZ R0, inicioCiclo200 ;Decrementa o valor de R0 e volta ao início do ciclo se não tiver valor 0.
 
-end
-```
-
-**a) Qual foi o tempo gasto em cada linha de instrução e o tempo total em us?**
-
-As instruções gastam 2us (considerando SETB e CLR como uma linha só). O tempo total foi de 23us.
-
-**b) Quantos ciclos de máquina esse programa contem?**
-
-Como o cristal oscilador do 8051 é de 12MHz e 1 ciclo de máquina leva 12 períodos de clock, então 1 ciclo de máquina leva 1us. Como o código tem 23us de tempo total, conclui-se que o programa gasta 23 ciclos de máquina.
-
-**c) O que aconteceu ao mover uma porta inteira de 8 registradores(como: 'MOV A, P1', no exemplo) para um destino e porque seu valor é FF ? (consulte a página 7 do datasheet AT89S51 Atmel que versa sobre a inicialização de registradores - lembrando que o MCS-51 possui 4 portas: P1, P2, P3, P4).**
-
-Ao mover uma porta inteira de 8 bits o valor de P1 é copiado para o registrador selecionado. Quando P1 está em FFh, os pinos estão aptos para serem usados como entradas.
-
-**d) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?
-O valor que apareceu no acumulador é o valor salvo na memória na posição apontada por R1. No caso FF.**
-
-O valor que apareceu em ACC foi o valor da memória, no endereço apontado por R1. Ou seja, R1 guardava uma posição de memória, que foi acessado e seu valor copiado para ACC.
-
-**e) Por que foi possível mover um valor de 4 dígitos para DPTR? Em quais registradores especiais do simulador foi poss�vel verificar mudanças quando a operação foi realizada? Qual o maior valor que pode ser movido para DPTR em hexadecimal?**
-
-O DPTR é uma junção de dois registradores, o DPH e o DPL, cada um com 2 digitos. O valor 9A foi para o DPH e o 5B para o DPL. Assim, o maior valor possível para o DPTR é FFFFh. 
-
-## 2) Manipulação de dados em registradores e endereços de memória por meio de instruções aritméticas: 
+	POP 01h ;Recupera o valor de R1 na pilha.
+	POP 00h ;Recupera o valor de R0 na pilha.
+	RET
 
 ```
-org 00h
 
-inicio:
-org 00h
-
-inicio:
-	MOV ACC,#02 ;Transfere o valor 2 em decimal para o registrador ACC
-	MOV B,#03 ;Transfere o valor 3 em decimal para o registrador B
-	MOV 022h,#07 ;Transfere o valor 7 em decimal para o endereço 22 da memória
-	ADD A,022h ;Soma o conteúdo do endereço de memória 22 com o ACC
-	;Decrementa 3 unidades em A
-	DEC A
-	DEC A
-	DEC A
-	INC B ;Incrementa 1 unidade no registrador B
-	SUBB A,B ;Subtrai o conteúdo de A por B
-	MUL AB ;Multiplica A por B
-	;Incrementa 2 unidades em B
-	INC B
-	INC B
-	DIV AB ;Divide A por B
-	
-	;Armazenana os valor de A e B em dois endereços de memória
-	MOV 04h, A
-	MOV 03h, B
-	
-	JMP inicio ;Vai para o início
-end ;Fim do programa
-```
-**1) Em um novo programa, mover de forma imediata o valor 4 para o ACC; na linha seguinte mover de forma imediata o valor 3 para o ACC. Execute as duas linhas clicando em “Assm”, observando PSW. Porque ao mover o valor 4 para ACC, o bit menos significativo de PSW resulta em 1; e ao mover o valor 3 esse bit resulta em 0?(OBS. Não é necessário salvar esse novo programa, somente execute a operação para responder a questão).**
-
-Isso ocorre pelo fato de que se a quantidade de bits 1 do meu valor for ímpar, o PSW indica o bit menos significativo como 1, e se o número de bits 1 for par o PSW indica como 0. No exemplo dado, o valor 4 (0100) indica 1 como o esperado e, o valor 3 (0011), indica 0.
-
-## 3) Manipulação de dados em registradores e endereços de memória por meio de instruções lógicas e booleanas:
+Dessa forma, é possível criar rotinas de espera de 250ms e de 1s executando a rotina de 10ms 25 e 100 vezes, respectivamente.
 
 ```
-org 0000h ;origem no endereço 00h
+;Rotina de delay de 0,25 segundo.
 
-inicio:
-	MOV ACC,#00010001b ;Transfere 00010001 em binario para o registrador ACC.
-	MOV B,#00001001b ;Transfere 00001001 em binario para o registrador B
-
-	ANL A,B ;Realiza AND entre A e B
-
-  	;Rotate right (rotacao a direita) duas vezes:
-	RR A 
-	RR A
-
-	CPL A ;Complemento de A
-
-  	;Rotate Left (rotacao a esquerda) duas vezes:
-	RL A 
-	RL A
-
-	ORL A,B ;OR entre A e B
-	XRL A,B ;XOR entre A e B
-	SWAP A ;Swap de A
-
-	JMP inicio ;volta para o inicio
-	
-	end ;encerra o programa
+Espera250ms:
+	PUSH 00h
+	MOV R0, #25 ;Carrega o registrador R0 com o número 25.
+	Espera250ms_ciclo10ms:
+		ACALL Espera10ms ;Chama a rotina de esperar 10ms.
+		DJNZ R0, Espera250ms_ciclo10ms ;Decrementa o valor de R0 e volta ao início se não for 0.
+	POP 00h
+	RET
 ```
 
-## 4) Manipulação de dados em registradores e endereços de memória por meio de instruções de desvio incondicional e condicional:
-
 ```
-org 00h ;Define a origem em 00h
+;Rotina de delay de 1 segundo.
 
-JMP inicio ;Pula para o label 'inicio'
-
-org 33h ;Define a origem em 33h
-
-inicio:
-	CLR A ;LIMPAR O REGISTRADOR ACC
-	MOV R0, #10h ;MOVE DE FORMA IMEDIATA O HEXADECIMAL 10h PARA O REGISTRADOR R0.
-	
-bloco1:
-	JZ bloco2 ;Pula para o 'bloco2' se ACC for 0
-	JNZ bloco3 ;Pula para o 'bloco2' se ACC for diferente de 0.
-	NOP ;Consome 1us de tempo.
-bloco2:
-	MOV ACC, R0 ;Move o valor de R0 para ACC.
-	JMP bloco1
-bloco3:
-	DJNZ R0, bloco3 ;Decrementa o R0 e, se ele não for, salta-se ao bloco 3, em loop.
-	JMP inicio ;Volta ao bloco de 'inicio'
-end
+Espera1s:
+	PUSH 00h ;Salva o valor de R0 na pilha.
+	MOV R0, #100 ;Carrega o registrador R0 com o número 100.
+	Espera1s_ciclo10ms:
+		ACALL Espera10ms ;Chama a rotina de esperar 10ms, sem executar uma condição.
+		DJNZ R0, Espera1s_ciclo10ms ;Decrementa o valor do registrador R1 e volta ao início do ciclo se não tiver valor 0.
+	POP 00h ;Recupera o valor de R0 da pilha.
+	RET
 ```
 
-Esse começa limpando o acumulador e guardando um número no registrador 0. O 'bloco1' é responsável por direcionar o código para outros blocos, conforme o estado do acumulador. Se o acumulador for zero, então ele é carregado com o número no registrador R0, voltando para o 'bloco1'. Se o acumulador for diferente de 0, então ele é decrementado até zero e volta ao inicio, onde o processo inteiro é repetido.
+### 1.2. Avaliando o funcionamento das chaves.
+
+Quando a chave 0 é pressionada, a contagem tem um intervalo de 250ms e quando a chave 1 é pressionada, a contagem tem um intervalo de 1s. Mas para a contagem funcionar, alguma chave deve estar pressionada. Para isso, há a rotina de receber uma entrada válida. Sabendo que a porta 2 (P2) é o barramento das chaves do 8051, utiliza-se uma máscara binária para selecionar apenas os bits referentes às chaves 0 e 1. Se ambas as chaves estiverem desligadas, isto é, se a porta apresentar 00000011b, o código volta ao início da rotina. Caso contrário, o código continua.
+
+```
+RecebeEntradaValida:
+	PUSH 00h ;Salva o valor do registrador R0 na pilha.
+	LePorta:
+		MOV R0, P2 ;Move o barramento das chaves para o registrador R0.
+		ANL 00h,#00000011b ;Seleciona apenas os bits das chaves 0 e 1.
+		CJNE R0, #00000011b, Continue ;Se ambas as chaves não estão desselecionadas, continua ao fim da rotina.
+		JMP LePorta ;Se ambas as chaves estão selecionadas, retorna ao início da rotina.
+	Continue:
+		POP 00h; Recupera o valor do registrador R0 da pilha.
+		RET
+```
+
+### 1.3. Mostrando o número no display de 7 segmentos.
+
+Um número no display de 7 segmentos equivale a um byte, contendo as informações dos 7 segmentos mais o ponto. Assim, o número 1 seria representado por 10011111b ou 9Fh. Fazendo o mesmo para todos os segmentos, tem-se a tabela.
+
+```
+;Tabela de segmentos do 0 ao 9.
+segmentos:
+	db 0C0h
+	db 0F9h
+	db 0A4h
+	db 0B0h
+	db 99h
+	db 92h
+	db 82h
+	db 0F8h
+	db 80h
+	db 90h
+``` 
+
+A tabela, então, é passada para o registrador DPTR, de 16 bits. O registrador ACC é o iterador da tabela, e, portanto, '@ACC+DPTR' aponta para a posição onde os segmentos estão selecionados. Esse valor é salvo em ACC e depois passado para a porta 1 (P1), que é o barramento dos segmentos do display.
+
+```
+MOV R0, #10 ;R0 como um iterador decrescente.
+MOV R1, #00 ;R1 com o primeiro valor da contagem.
+
+MOV DPTR, #segmentos ;Carrega um registrador de 16 bits com os valores de cada 7seg.
+MOV ACC, R1 ;Acumulador recebe a posição do início da contagem na tabela de segmentos
+MOVC ACC, @ACC+DPTR ;Acumulador recebe o valor do byte correspondente ao segmento apontado.
+MOV P1, A ;Acumulador passa esse valor para a porta P1, onde está o display 7seg.
+INC R1 ;A contagem é incrementada.
+``` 
+
+## Diagrama esquemático do 8051.
+
+<p align="center">
+    <img width = 400 src="Images/Figura - diagrama logico 8051.png">
+</p>
+
+## Varredura do display de 7 segmentos no 8051.
+
+## Código completo comentado.
