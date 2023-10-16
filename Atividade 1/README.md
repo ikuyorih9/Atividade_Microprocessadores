@@ -50,8 +50,7 @@ Como o cristal oscilador do 8051 é de 12MHz e 1 ciclo de máquina leva 12 perí
 
 Ao mover uma porta inteira de 8 bits o valor de P1 é copiado para o registrador selecionado. Quando P1 está em FFh, os pinos estão aptos para serem usados como entradas.
 
-**d) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?
-O valor que apareceu no acumulador é o valor salvo na memória na posição apontada por R1. No caso FF.**
+**d) Qual valor apareceu no acumulador após ter movido R1 de forma indireta para ele?**
 
 O valor que apareceu em ACC foi o valor da memória, no endereço apontado por R1. Ou seja, R1 guardava uma posição de memória, que foi acessado e seu valor copiado para ACC.
 
