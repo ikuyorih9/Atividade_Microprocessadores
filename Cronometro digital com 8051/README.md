@@ -94,8 +94,23 @@ segmentos:
 	db 80h
 	db 90h
 ``` 
+<center>
+
+| Decimal | Byte binário do segmento | Byte hexadecimal do segmento |
+|---------|--------------------------|------------------------------|
+| 0       | 11000000                 | C0                           |
+| 1       | 11111001                 | F9                           |
+| 2       | 10100100                 | A4                           |
+| 3       | 10110000                 | B0                           |
+| 4       | 10011001                 | 99                           |
+| 5       | 10010010                 | 92                           |
+| 6       | 10000010                 | 82                           |
+| 7       | 11111000                 | F8                           |
+| 8       | 10000000                 | 80                           |
+| 9       | 10010000                 | 90                           |
 
 A tabela, então, é passada para o registrador DPTR, de 16 bits. O registrador ACC é o iterador da tabela, e, portanto, '@ACC+DPTR' aponta para a posição onde os segmentos estão selecionados. Esse valor é salvo em ACC e depois passado para a porta 1 (P1), que é o barramento dos segmentos do display.
+</center>
 
 ```
 MOV R0, #10 ;R0 como um iterador decrescente.
