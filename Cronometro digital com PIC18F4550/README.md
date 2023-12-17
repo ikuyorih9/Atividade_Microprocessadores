@@ -1,6 +1,6 @@
 # Cronometro Digital com PIC18F4550.
 
-* Guilherme Chiarotto de Moraes ();
+* Guilherme Chiarotto de Moraes (12745229);
 * Hugo Hiroyuki Nakamura (12732037);
 
 ---
