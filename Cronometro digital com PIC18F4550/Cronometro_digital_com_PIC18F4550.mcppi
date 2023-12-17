@@ -50,7 +50,7 @@ IVT_BASE=00000008
 1=Sources
 Count=2
 [LIB_EXPANDED_NODES]
-Count=0
+Count=1
 [PROGRAMMER_TYPE]
 Value=mikroE mikroProg
 [CODEGRIP_OPTIONS]

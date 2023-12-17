@@ -1,5 +1,5 @@
-int contagem;
-int bcd[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x67};
+int contagem; // Valor atual da contagem.
+const int bcd[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x67}; //Mapeamento decimal para BCD7SEG.
 
 /**
  * Mostra o valor atual da contagem no display 7seg e conta o cronometro.
@@ -52,11 +52,11 @@ void INTERRUPCAO_HIGH() iv 0x0008 ics ICS_AUTO{
 void main(){
     //CONFIGURA AS PORTAS USADAS.
     ADCON1 |= 0X0F; //Define os pinos na porta B como entradas digitais (00001111).
-    TRISA = 0; //Define a porta A como saída.
-    PORTA = 0x0F; //Define todos os valores da porta A com nível baixo (0).
-    TRISD = 0;  //Define a porta D como saída.
-    PORTD = 0;  //Define todos os valores da porta D com nível baixo (0).
-    TRISB = 1 //Define a porta B como entrada.
+    TRISA = 0x00; //Define a porta A como saída.
+    PORTA = 0x00; //Define todos os valores da porta A com nível baixo (0).
+    TRISD = 0x00;  //Define a porta D como saída.
+    PORTD = 0x00;  //Define todos os valores da porta D com nível baixo (0).
+    TRISB = 0x0F; //Define a porta B como entrada.
     INTCON2.RBPU = 0; //Habilita chave global de resistores de pull-up na porta B.
 
 
