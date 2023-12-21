@@ -9,6 +9,7 @@ O circuito usa um potenciômetro (resistor variável) conectado à porta analóg
 
 ### 1.1 Funcionamento do potenciômetro
 O potenciômetro é conectado a uma porta analógica (AN4 no código) e funciona como um divisor de tensão. A posição do potenciômetro determina a tensão na porta analógica. 
+
 O código, portanto, lê continuamente a tensão no potenciômetro, ajusta a escala e exibe a tensão no LCD. O usuário verá um valor numérico que representa a tensão medida em uma determinada escala.
 
 ### 1.2 Configuração do LCD
