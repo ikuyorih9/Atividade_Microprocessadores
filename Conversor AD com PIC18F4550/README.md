@@ -4,7 +4,9 @@
 * Hugo Hiroyuki Nakamura (12732037);
 
 ---
-## 1 XXXXXXX.
+## 1 Principais conceitos e resultados obtidos.
+
+---
 ## 2 Circuito no Simulide.
 
 O código foi simulado no Simulide, segundo o esquemático abaixo.
