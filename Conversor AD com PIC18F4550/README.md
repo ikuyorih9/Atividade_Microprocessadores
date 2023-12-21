@@ -5,6 +5,84 @@
 
 ---
 ## 1 Principais conceitos e resultados obtidos.
+O circuito usa um potenciômetro (resistor variável) conectado à porta analógica AN4 de um microcontrolador PIC. A tensão no potenciômetro é medida pelo conversor analógico para digital (ADC) do microcontrolador. Essa tensão é então convertida em uma representação digital e exibida em um display LCD.
+
+### 1.1 Configuração do LCD
+O display LCD está conectado ao microcontrolador PIC por meio de seis pinos, que são definidos no início do código usando a biblioteca sbit. A direção do fluxo de dados é configurada através dos pinos TRISBx_bit, onde x é o número do pino. Isso define quais pinos serão usados como entradas e saídas para o LCD.
+
+### 1.2 Inicialização do LCD
+A biblioteca Lcd_Init() é utilizada para inicializar o LCD. Lcd_Cmd(_LCD_CLEAR) limpa a tela do LCD, e Lcd_Cmd(_LCD_CURSOR_OFF) desliga o cursor. A função Lcd_Out(1,1,"ADC0:") escreve o texto "ADC0:" na posição (1,1) do LCD.
+
+### 1.3 Configuração do ACD
+O pino RA5 é configurado como uma entrada analógica (TRISA.RA5 = 1;) e ADCON1 é configurado para garantir que as portas analógicas estejam habilitadas (ADCON1 = 0B00000000;).
+
+### 1.4 Loop Principal
+Dentro do loop principal (while(1)), o programa entra em um loop infinito onde a leitura do ADC é realizada continuamente.
+
+#### 1.4.1 Leitura do ADC
+```
+Valor_ADC = ADC_Read(4);
+```
+Isso lê o valor analógico da porta AN4 (A5) e armazena em Valor_ADC. O valor lido está na faixa de 0 a 1023.
+
+#### 1.4.2 Ajuste da leitura e formatação
+
+```
+Valor_ADC = Valor_ADC * (1234/1023.);
+```
+Este trecho ajusta o valor lido do ADC para a faixa de 0 a 1234. Essa é uma correção de escala para refletir a faixa real de tensão que está sendo medida.
+
+```
+Tensao[0] = (Valor_ADC/1000) + '0';
+Tensao[1] = (Valor_ADC/100)%10 + '0';
+Tensao[2] = '.';
+Tensao[3] = (Valor_ADC/10)%10 + '0';
+Tensao[4] = (Valor_ADC/1)%10 + '0';
+Tensao[5] = 0;
+```
+Estes comandos convertem o valor ajustado em uma string de caracteres (Tensao), representando a tensão. Os valores são convertidos em dígitos ASCII e armazenados na string.
+
+#### 1.4.3 Exibição no LCD
+
+```
+Lcd_Out(1,6,Tensao);
+```
+Coloca a string Tensao no LCD, começando na posição (1,6).
+
+#### 1.4.4 Delay
+
+```
+Delay_ms(20);
+```
+Atraso adicionado para garantir que o LCD tenha tempo suficiente para processar e exibir as informações.
+
+### 1.5 Funcionamento do potenciômetro
+O potenciômetro é conectado a uma porta analógica (AN4 no código) e funciona como um divisor de tensão. A posição do potenciômetro determina a tensão na porta analógica. O ADC converte essa tensão em um valor digital (0 a 1234).
+O código, portanto, lê continuamente a tensão no potenciômetro, ajusta a escala e exibe a tensão no LCD. O usuário verá um valor numérico que representa a tensão medida em uma determinada escala.
+
+### 1.6 Resultados e funcionamento geral
+
+#### 1.6.1 Potenciômetro (Resistor Variável)
+Ao girar o potenciômetro, você altera a resistência entre seus terminais, o que, por sua vez, altera a tensão na porta analógica (AN4).
+
+Isso permite ajustar a tensão de entrada no microcontrolador, que é então medida pelo ADC.
+
+#### 1.6.2 Conversão Analógico para Digital (ADC)
+O valor lido pelo ADC está inicialmente na faixa de 0 a 1023, representando a tensão na porta analógica em termos digitais.
+
+O trecho Valor_ADC = Valor_ADC * (1234/1023.); ajusta esse valor para uma escala de 0 a 1234, proporcionando uma correspondência mais direta com a escala real da tensão medida.
+
+#### 1.6.3 Exibição no LCD
+O LCD mostra a tensão medida em tempo real, representada como uma string de caracteres.
+
+Ao girar o potenciômetro, a string no LCD deve ser atualizada para refletir a nova tensão medida.
+
+#### Display com valor de tensão float
+O valor da tensão é convertido em uma string (Tensao) e exibido no LCD. No entanto, os microcontroladores geralmente não suportam operações de ponto flutuante diretamente.
+
+A exibição de ponto flutuante é simulada pela representação dos dígitos decimais. Por exemplo, "1234" pode ser exibido como "12.34".
+
+O código converte a tensão medida em uma representação decimal, permitindo que o usuário visualize a tensão com precisão de duas casas decimais.
 
 ---
 ## 2 Circuito no Simulide.
