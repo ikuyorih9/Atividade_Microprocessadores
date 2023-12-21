@@ -19,7 +19,7 @@ O display LCD está conectado ao microcontrolador PIC por meio de seis pinos, qu
 A biblioteca Lcd_Init() é utilizada para inicializar o LCD. Lcd_Cmd(_LCD_CLEAR) limpa a tela do LCD, e Lcd_Cmd(_LCD_CURSOR_OFF) desliga o cursor. A função Lcd_Out(1,1,"ADC0:") escreve o texto "ADC0:" na posição (1,1) do LCD.
 
 ### 1.4 Configuração do ADC
-O ADCON1 é configurado para garantir que as portas sejam analógicas (ADCON1 = 0B00000000;).
+O ADCON1 é configurado para garantir que as portas sejam analógicas (ADCON1 = 0B00000000;). A função ADC_Init() faz a inicialização do módulo ADC.
 
 ### 1.5 Loop Principal
 Dentro do loop principal (while(1)), o programa entra em um loop infinito onde a leitura do ADC é realizada continuamente.
