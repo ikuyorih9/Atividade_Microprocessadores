@@ -5,7 +5,7 @@
 
 ---
 ## 1 Principais conceitos e resultados obtidos.
-O circuito usa um potenciômetro (resistor variável) conectado à porta analógica AN4 de um microcontrolador PIC. A tensão no potenciômetro é medida pelo conversor analógico para digital (ADC) do microcontrolador. Essa tensão é então convertida em uma representação digital e exibida em um display LCD.
+O circuito usa um potenciômetro (resistor variável) conectado à porta analógica AN4 de um microcontrolador PIC18F4550. A tensão no potenciômetro é medida pelo conversor analógico para digital (ADC) do microcontrolador. Essa tensão é então convertida em uma representação digital e exibida em um display LCD.
 
 ### 1.1 Configuração do LCD
 O display LCD está conectado ao microcontrolador PIC por meio de seis pinos, que são definidos no início do código usando a biblioteca sbit. A direção do fluxo de dados é configurada através dos pinos TRISBx_bit, onde x é o número do pino. Isso define quais pinos serão usados como entradas e saídas para o LCD.
